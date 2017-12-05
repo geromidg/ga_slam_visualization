@@ -3,39 +3,46 @@ project(ga_slam_visualization)
 
 set(CMAKE_CXX_FLAGS "-std=c++11 ${CMAKE_CXX_FLAGS}")
 
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(ga_slam_visualization_PKGCONFIG REQUIRED grid_map_cereal)
+
 find_package(catkin REQUIRED COMPONENTS
-  grid_map_core
-  grid_map_msgs
-  grid_map_ros
-  roscpp
-  std_msgs
+    grid_map_core
+    grid_map_msgs
+    grid_map_ros
+    roscpp
+    std_msgs
 )
 
 find_package(Eigen3 REQUIRED)
 
 catkin_package(
-  INCLUDE_DIRS
-    include
-    ${Eigen_INCLUDE_DIRS}
-  CATKIN_DEPENDS
-    grid_map_core
-    grid_map_ros
-    grid_map_msgs
-    roscpp
-    std_msgs
+    INCLUDE_DIRS
+        include
+        ${Eigen_INCLUDE_DIRS}
+    CATKIN_DEPENDS
+        grid_map_core
+        grid_map_ros
+        grid_map_msgs
+        roscpp
+        std_msgs
+    # DEPENDS
+        # grid_map_cereal
 )
 
 include_directories(
-  include
-  ${catkin_INCLUDE_DIRS}
-  ${Eigen_INCLUDE_DIRS}
+    include
+    ${catkin_INCLUDE_DIRS}
+    ${Eigen_INCLUDE_DIRS}
+    ${ga_slam_visualization_PKGCONFIG_INCLUDE_DIRS}
 )
 
 add_executable(${PROJECT_NAME}
-  src/ga_slam_visualization_node.cpp
+    src/ga_slam_visualization_node.cpp
 )
 
 target_link_libraries(${PROJECT_NAME}
-  ${catkin_LIBRARIES}
+    ${catkin_LIBRARIES}
+    ${ga_slam_visualization_PKGCONFIG_LDFLAGS}
 )
 

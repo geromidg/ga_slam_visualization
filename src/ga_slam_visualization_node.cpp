@@ -13,19 +13,27 @@
 int main(int argc, char **argv) {
     ros::init(argc, argv, "ga_slam_visualization");
     ros::NodeHandle nodeHandle("~");
-    ros::Rate rate(0.5);
+    ros::Rate rate(1);
     ros::Publisher rawMapPublisher = nodeHandle.
             advertise<grid_map_msgs::GridMap>("raw_map", 1, true);
 
     grid_map::GridMap rawMap;
     grid_map_msgs::GridMap message;
+    grid_map::Time lastUpdateTimestamp, currentUpdateTimestamp;
+
+    lastUpdateTimestamp = 0;
 
     while (ros::ok()) {
         loadGridMap(rawMap, "/tmp/ga_slam_map.cereal");
         rawMap.setFrameId("map");
+        currentUpdateTimestamp = rawMap.getTimestamp();
 
-        grid_map::GridMapRosConverter::toMessage(rawMap, message);
-        rawMapPublisher.publish(message);
+        if (currentUpdateTimestamp != lastUpdateTimestamp) {
+            lastUpdateTimestamp = currentUpdateTimestamp;
+
+            grid_map::GridMapRosConverter::toMessage(rawMap, message);
+            rawMapPublisher.publish(message);
+        }
 
         rate.sleep();
     }

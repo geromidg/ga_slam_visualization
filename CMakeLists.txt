@@ -18,7 +18,6 @@ find_package(Eigen3 REQUIRED)
 
 catkin_package(
     INCLUDE_DIRS
-        include
         ${Eigen_INCLUDE_DIRS}
     CATKIN_DEPENDS
         grid_map_core
@@ -26,8 +25,6 @@ catkin_package(
         grid_map_msgs
         roscpp
         std_msgs
-    # DEPENDS
-        # grid_map_cereal
 )
 
 include_directories(

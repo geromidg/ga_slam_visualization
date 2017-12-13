@@ -7,5 +7,8 @@
 
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find ga_slam_visualization)/rviz/ga_slam_visualization.rviz"/>
 
-  <param name="robot_description" command="cat $(find ga_slam_visualization)/urdf/hdpr.urdf" />
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="state_publisher"/>
+
+  <param name="robot_description" command="cat $(find ga_slam_visualization)/urdf/exoter.urdf" />
 </launch>
+

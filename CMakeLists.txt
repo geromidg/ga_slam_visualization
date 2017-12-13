@@ -13,6 +13,8 @@ find_package(catkin REQUIRED COMPONENTS
     roscpp
     std_msgs
     eigen_conversions
+    tf
+    tf_conversions
 )
 
 find_package(Eigen3 REQUIRED)
@@ -27,6 +29,8 @@ catkin_package(
         roscpp
         std_msgs
         eigen_conversions
+        tf
+        tf_conversions
 )
 
 include_directories(

@@ -5,6 +5,8 @@
 #include <ros/ros.h>
 #include <geometry_msgs/PoseStamped.h>
 #include <eigen_conversions/eigen_msg.h>
+#include <tf/transform_broadcaster.h>
+#include <tf_conversions/tf_eigen.h>
 
 #include <grid_map_core/grid_map_core.hpp>
 #include <grid_map_ros/grid_map_ros.hpp>
@@ -20,8 +22,11 @@ int main(int argc, char **argv) {
             advertise<grid_map_msgs::GridMap>("raw_map", 1, true);
     ros::Publisher posePublisher = nodeHandle.
             advertise<geometry_msgs::PoseStamped>("pose", 1, true);
+    tf::TransformBroadcaster tfBroadcaster;
+    tf::Transform bodyToMapTF;
 
-    const std::string frameId = "map";
+    const std::string mapFrameId = "map";
+    const std::string bodyFrameId = "body_base";
 
     Eigen::Affine3d pose;
     geometry_msgs::Pose poseMessage;
@@ -29,28 +34,32 @@ int main(int argc, char **argv) {
 
     grid_map::GridMap rawMap;
     grid_map_msgs::GridMap rawMapMessage;
-    grid_map::Time lastUpdateTimestamp, currentUpdateTimestamp;
+    grid_map::Time lastStamp, currentStamp;
 
-    lastUpdateTimestamp = 0;
+    lastStamp = 0;
 
     while (ros::ok()) {
         loadPose(pose, "/tmp/ga_slam_pose.cereal");
         loadGridMap(rawMap, "/tmp/ga_slam_map.cereal");
 
-        rawMap.setFrameId(frameId);
-        currentUpdateTimestamp = rawMap.getTimestamp();
+        rawMap.setFrameId(mapFrameId);
+        currentStamp = rawMap.getTimestamp();
 
-        if (currentUpdateTimestamp != lastUpdateTimestamp) {
-            lastUpdateTimestamp = currentUpdateTimestamp;
+        if (currentStamp != lastStamp) {
+            lastStamp = currentStamp;
 
             grid_map::GridMapRosConverter::toMessage(rawMap, rawMapMessage);
             rawMapPublisher.publish(rawMapMessage);
 
             tf::poseEigenToMsg(pose, poseMessage);
             poseStampedMessage.pose = poseMessage;
-            poseStampedMessage.header.stamp.fromNSec(currentUpdateTimestamp);
-            poseStampedMessage.header.frame_id = frameId;
+            poseStampedMessage.header.stamp.fromNSec(currentStamp);
+            poseStampedMessage.header.frame_id = mapFrameId;
             posePublisher.publish(poseStampedMessage);
+
+            tf::poseEigenToTF(pose, bodyToMapTF);
+            tfBroadcaster.sendTransform(tf::StampedTransform(
+                    bodyToMapTF, ros::Time::now(), bodyFrameId, mapFrameId));
         }
 
         rate.sleep();

@@ -30,9 +30,9 @@ Visualization Manager:
   Displays:
     - Class: rviz/Axes
       Enabled: true
-      Length: 0.5
+      Length: 0.25
       Name: Axes
-      Radius: 0.0500000007
+      Radius: 0.00999999978
       Reference Frame: <Fixed Frame>
       Value: true
     - Alpha: 0.699999988
@@ -229,6 +229,29 @@ Visualization Manager:
       Unreliable: false
       Value: true
     - Alpha: 1
+      Buffer Length: 1
+      Class: rviz/Path
+      Color: 121; 0; 12
+      Enabled: true
+      Head Diameter: 0.300000012
+      Head Length: 0.200000003
+      Length: 0.300000012
+      Line Style: Billboards
+      Line Width: 0.0299999993
+      Name: Path
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Pose Color: 255; 85; 255
+      Pose Style: None
+      Radius: 0.0299999993
+      Shaft Diameter: 0.100000001
+      Shaft Length: 0.100000001
+      Topic: /ga_slam_visualization/path
+      Unreliable: false
+      Value: true
+    - Alpha: 1
       Autocompute Intensity Bounds: true
       Class: grid_map_rviz_plugin/GridMap
       Color: 200; 200; 200
@@ -303,25 +326,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 9.26716328
+      Distance: 9.71998119
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 4.23971319
-        Y: 1.71772802
-        Z: -0.328461856
+        X: 3.98980975
+        Y: 2.44212651
+        Z: 0.660035491
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.0500000007
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 0.449797451
+      Pitch: 0.294797957
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 2.74041867
+      Yaw: 2.74541426
     Saved: ~
 Window Geometry:
   Displays:
@@ -339,5 +362,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1338
-  X: 2491
-  Y: 157
+  X: 2485
+  Y: 73

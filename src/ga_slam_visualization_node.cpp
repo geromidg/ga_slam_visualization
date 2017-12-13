@@ -4,6 +4,7 @@
 
 #include <ros/ros.h>
 #include <geometry_msgs/PoseStamped.h>
+#include <nav_msgs/Path.h>
 #include <eigen_conversions/eigen_msg.h>
 #include <tf/transform_broadcaster.h>
 #include <tf_conversions/tf_eigen.h>
@@ -22,8 +23,9 @@ int main(int argc, char **argv) {
             advertise<grid_map_msgs::GridMap>("raw_map", 1, true);
     ros::Publisher posePublisher = nodeHandle.
             advertise<geometry_msgs::PoseStamped>("pose", 1, true);
+    ros::Publisher pathPublisher = nodeHandle.
+            advertise<nav_msgs::Path>("path", 1, true);
     tf::TransformBroadcaster tfBroadcaster;
-    tf::Transform bodyToMapTF;
 
     const std::string mapFrameId = "map";
     const std::string bodyFrameId = "body_base";
@@ -31,6 +33,8 @@ int main(int argc, char **argv) {
     Eigen::Affine3d pose;
     geometry_msgs::Pose poseMessage;
     geometry_msgs::PoseStamped poseStampedMessage;
+    nav_msgs::Path pathMessage;
+    tf::Transform bodyToMapTF;
 
     grid_map::GridMap rawMap;
     grid_map_msgs::GridMap rawMapMessage;
@@ -46,8 +50,6 @@ int main(int argc, char **argv) {
         currentStamp = rawMap.getTimestamp();
 
         if (currentStamp != lastStamp) {
-            lastStamp = currentStamp;
-
             grid_map::GridMapRosConverter::toMessage(rawMap, rawMapMessage);
             rawMapPublisher.publish(rawMapMessage);
 
@@ -59,7 +61,16 @@ int main(int argc, char **argv) {
 
             tf::poseEigenToTF(pose, bodyToMapTF);
             tfBroadcaster.sendTransform(tf::StampedTransform(
-                    bodyToMapTF, ros::Time::now(), bodyFrameId, mapFrameId));
+                    bodyToMapTF, ros::Time::now(), mapFrameId, bodyFrameId));
+
+            if (currentStamp < lastStamp)
+                pathMessage.poses.clear();
+            pathMessage.header.stamp.fromNSec(currentStamp);
+            pathMessage.header.frame_id = mapFrameId;
+            pathMessage.poses.push_back(poseStampedMessage);
+            pathPublisher.publish(pathMessage);
+
+            lastStamp = currentStamp;
         }
 
         rate.sleep();

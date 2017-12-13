@@ -3,10 +3,9 @@ Panels:
     Help Height: 0
     Name: Displays
     Property Tree Widget:
-      Expanded:
-        - /Global Options1
+      Expanded: ~
       Splitter Ratio: 0.611464977
-    Tree Height: 774
+    Tree Height: 757
   - Class: rviz/Selection
     Name: Selection
   - Class: rviz/Tool Properties
@@ -25,7 +24,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: Elevation
+    SyncSource: ""
 Visualization Manager:
   Class: ""
   Displays:
@@ -74,12 +73,12 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        fl_fork:
+        differential:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        fl_hinge:
+        fl_fork:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -99,11 +98,6 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        fr_hinge:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
         fr_motor:
           Alpha: 1
           Show Axes: false
@@ -119,12 +113,12 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        mast_assembly:
+        left_rocker:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        ml_hinge:
+        mast_assembly:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -135,11 +129,6 @@ Visualization Manager:
           Show Trail: false
           Value: true
         ml_wheel:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        mr_hinge:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -159,22 +148,17 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        rear_bogie:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
         right_bogie:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        rl_fork:
+        right_rocker:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        rl_hinge:
+        rl_fork:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -190,11 +174,6 @@ Visualization Manager:
           Show Trail: false
           Value: true
         rr_fork:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        rr_hinge:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -235,8 +214,8 @@ Visualization Manager:
       Update Interval: 0
       Value: false
     - Alpha: 1
-      Axes Length: 0.5
-      Axes Radius: 0.00999999978
+      Axes Length: 1
+      Axes Radius: 0.0250000004
       Class: rviz/Pose
       Color: 255; 25; 0
       Enabled: true
@@ -324,25 +303,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 7.02817726
+      Distance: 9.26716328
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 3.22847986
-        Y: 2.25468016
-        Z: 1.17950356
+        X: 4.23971319
+        Y: 1.71772802
+        Z: -0.328461856
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.0500000007
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 0.409797579
+      Pitch: 0.449797451
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 2.74040675
+      Yaw: 2.74041867
     Saved: ~
 Window Geometry:
   Displays:
@@ -350,7 +329,7 @@ Window Geometry:
   Height: 981
   Hide Left Dock: true
   Hide Right Dock: false
-  QMainWindow State: 000000ff00000000fd00000004000000000000016a00000347fc0200000008fb0000001200530065006c0065006300740069006f006e00000000410000009b0000005e00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073000000004100000347000000d100fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261000000010000010f00000347fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073000000004100000347000000ae00fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e100000197000000030000053a0000003efc0100000002fb0000000800540069006d006501000000000000053a000002e600fffffffb0000000800540069006d006501000000000000045000000000000000000000053a0000033600000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd00000004000000000000016a00000336fc0200000008fb0000001200530065006c0065006300740069006f006e00000000410000009b0000005e00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073000000004100000336000000d100fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261000000010000010f00000347fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073000000004100000347000000ae00fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e100000197000000030000053a0000003efc0100000002fb0000000800540069006d006501000000000000053a000002e600fffffffb0000000800540069006d006501000000000000045000000000000000000000053a0000033600000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:
@@ -360,5 +339,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1338
-  X: 2493
-  Y: 185
+  X: 2491
+  Y: 157

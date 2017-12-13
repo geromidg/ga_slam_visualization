@@ -10,14 +10,14 @@
 
 <!-- Link definitions -->
 <!-- Base Link of the Rover, main body of the rover, which looks like a Box -->
-<link name="body">
+<link name="body_base">
     <visual>
         <geometry>
             <box size="1.0 0.7 0.1"/>
         </geometry>
         <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>\
-        <material name="Red">
-            <color rgba="1.0 0.0 0.0 1.0"/>
+        <material name="White">
+            <color rgba="1.0 1.0 1.0 1.0"/>
         </material>
     </visual>
 </link>
@@ -30,8 +30,8 @@
             <box size="0.7 0.02 0.02"/> <!-- length, width, height-->
         </geometry>
         <origin xyz="0.0 0.0 0.0" rpy="0 0 1.552"/>
-        <material name="Black" >
-            <color rgba="0.0 0.0 0.0 1.0"/>
+        <material name="White" >
+            <color rgba="1.0 1.0 1.0 1.0"/>
         </material>
     </visual>
 </link>
@@ -43,8 +43,8 @@
             <box size="0.794 0.02 0.02"/>
         </geometry>
         <origin xyz="0.375 0.0 -0.13" rpy="0 0.33 0.0"/>
-        <material name="Black" >
-            <color rgba="0.0 0.0 0. 1.0"/>
+        <material name="White" >
+            <color rgba="1.0 1.0 1. 1.0"/>
         </material>
     </visual>
     <visual>
@@ -52,8 +52,8 @@
             <box size="0.456 0.02 0.02"/>
         </geometry>
         <origin xyz="-0.1875 0.0 -0.13" rpy="0 -0.61 0.0"/>
-        <material name="Black" >
-            <color rgba="0.0 0.0 0. 1.0"/>
+        <material name="White" >
+            <color rgba="1.0 1.0 1. 1.0"/>
         </material>
     </visual>
 </link>
@@ -65,8 +65,8 @@
             <box size="0.794 0.02 0.02"/>
         </geometry>
         <origin xyz="0.375 0.0 -0.13" rpy="0 0.33 0.0"/>
-        <material name="Black" >
-            <color rgba="0.0 0.0 0. 1.0"/>
+        <material name="White" >
+            <color rgba="1.0 1.0 1. 1.0"/>
         </material>
     </visual>
     <visual>
@@ -74,8 +74,8 @@
             <box size="0.456 0.02 0.02"/>
         </geometry>
         <origin xyz="-0.1875 0.0 -0.13" rpy="0 -0.61 0.0"/>
-        <material name="Black" >
-            <color rgba="0.0 0.0 0. 1.0"/>
+        <material name="White" >
+            <color rgba="1.0 1.0 1. 1.0"/>
         </material>
     </visual>
 </link>
@@ -88,8 +88,8 @@
             <box size="0.750 0.02 0.02"/>
         </geometry>
         <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
-        <material name="Black" >
-            <color rgba="0.0 0.0 0. 1.0"/>
+        <material name="White" >
+            <color rgba="1.0 1.0 1. 1.0"/>
         </material>
     </visual>
 </link>
@@ -101,8 +101,8 @@
             <box size="0.750 0.02 0.02"/>
         </geometry>
         <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
-        <material name="Black" >
-            <color rgba="0.0 0.0 0. 1.0"/>
+        <material name="White" >
+            <color rgba="1.0 1.0 1. 1.0"/>
         </material>
     </visual>
 </link>
@@ -114,8 +114,8 @@
             <mesh filename="package://ga_slam_visualization/urdf/meshes/exoter/motor_block_fl.stl" scale = "1 1 1"/>
         </geometry>
         <origin xyz="0.0 0.0 0.0" rpy="0 0 0.0"/>
-        <material name="Black" >
-            <color rgba="0.0 0.0 0. 1.0"/>
+        <material name="White" >
+            <color rgba="1.0 1.0 1. 1.0"/>
         </material>
     </visual>
 </link>
@@ -127,8 +127,8 @@
             <mesh filename="package://ga_slam_visualization/urdf/meshes/exoter/motor_block_rl.stl" scale = "1 1 1"/>
         </geometry>
         <origin xyz="0.0 0.0 0.0" rpy="0 0 0.0"/>
-        <material name="Black" >
-            <color rgba="0.0 0.0 0. 1.0"/>
+        <material name="White" >
+            <color rgba="1.0 1.0 1. 1.0"/>
         </material>
     </visual>
 </link>
@@ -140,8 +140,8 @@
             <mesh filename="package://ga_slam_visualization/urdf/meshes/exoter/motor_block_rl.stl" scale = "1 1 1"/>
         </geometry>
         <origin xyz="0.0 0.0 0.0" rpy="0 0 0.0"/>
-        <material name="Black" >
-            <color rgba="0.0 0.0 0. 1.0"/>
+        <material name="White" >
+            <color rgba="1.0 1.0 1. 1.0"/>
         </material>
     </visual>
 </link>
@@ -153,8 +153,8 @@
             <mesh filename="package://ga_slam_visualization/urdf/meshes/exoter/motor_block_rr.stl" scale = "1 1 1"/>
         </geometry>
         <origin xyz="0.0 0.0 0.0" rpy="0 0 0.0"/>
-        <material name="Black" >
-            <color rgba="0.0 0.0 0. 1.0"/>
+        <material name="White" >
+            <color rgba="1.0 1.0 1. 1.0"/>
         </material>
     </visual>
 </link>
@@ -166,8 +166,8 @@
             <mesh filename="package://ga_slam_visualization/urdf/meshes/exoter/motor_middle_left.stl" scale = "1 1 1"/>
         </geometry>
         <origin xyz="0.0 0.0 0.0" rpy="0 0 0.0"/>
-        <material name="Black" >
-            <color rgba="0.0 0.0 0. 1.0"/>
+        <material name="White" >
+            <color rgba="1.0 1.0 1. 1.0"/>
         </material>
     </visual>
 </link>
@@ -179,8 +179,8 @@
             <mesh filename="package://ga_slam_visualization/urdf/meshes/exoter/motor_middle_right.stl" scale = "1 1 1"/>
         </geometry>
         <origin xyz="0.0 0.0 0.0" rpy="0 0 0.0"/>
-        <material name="Black" >
-            <color rgba="0.0 0.0 0. 1.0"/>
+        <material name="White" >
+            <color rgba="1.0 1.0 1. 1.0"/>
         </material>
     </visual>
 </link>
@@ -193,8 +193,8 @@
             <mesh filename="package://ga_slam_visualization/urdf/meshes/exoter/fork_left.stl" scale = "1 1 1"/>
         </geometry>
         <origin xyz="0.0 0.0 0.0" rpy="0 0 0.0"/>
-        <material name="Black" >
-            <color rgba="0.0 0.0 0. 1.0"/>
+        <material name="White" >
+            <color rgba="1.0 1.0 1. 1.0"/>
         </material>
     </visual>
 </link>
@@ -206,8 +206,8 @@
             <mesh filename="package://ga_slam_visualization/urdf/meshes/exoter/fork_right.stl" scale = "1 1 1"/>
         </geometry>
         <origin xyz="0.0 0.0 0.0" rpy="0 0 0.0"/>
-        <material name="Black" >
-            <color rgba="0.0 0.0 0. 1.0"/>
+        <material name="White" >
+            <color rgba="1.0 1.0 1. 1.0"/>
         </material>
     </visual>
 </link>
@@ -219,8 +219,8 @@
             <mesh filename="package://ga_slam_visualization/urdf/meshes/exoter/fork_left.stl" scale = "1 1 1"/>
         </geometry>
         <origin xyz="0.0 0.0 0.0" rpy="0 0 0.0"/>
-        <material name="Black" >
-            <color rgba="0.0 0.0 0. 1.0"/>
+        <material name="White" >
+            <color rgba="1.0 1.0 1. 1.0"/>
         </material>
     </visual>
 </link>
@@ -232,8 +232,8 @@
             <mesh filename="package://ga_slam_visualization/urdf/meshes/exoter/fork_right.stl" scale = "1 1 1"/>
         </geometry>
         <origin xyz="0.0 0.0 0.0" rpy="0 0 0.0"/>
-        <material name="Black" >
-            <color rgba="0.0 0.0 0.0 1.0"/>
+        <material name="White" >
+            <color rgba="1.0 1.0 1.0 1.0"/>
         </material>
     </visual>
 </link>
@@ -242,7 +242,7 @@
 <link name="fl_wheel">
     <visual>
         <geometry>
-            <mesh filename="package://ga_slam_visualization/urdf/meshes/exoter/wheel.stl" scale = "1 1 1"/>
+            <mesh filename="package://ga_slam_visualization/urdf/meshes/exoter/wheel.stl" scale = "1.66 1 1.66"/>
         </geometry>
         <origin xyz="0.0 0.0 0.0" rpy="0 0 0.0"/>
         <material name="White" >
@@ -255,7 +255,7 @@
 <link name="fr_wheel">
     <visual>
         <geometry>
-            <mesh filename="package://ga_slam_visualization/urdf/meshes/exoter/wheel.stl" scale = "1 1 1"/>
+            <mesh filename="package://ga_slam_visualization/urdf/meshes/exoter/wheel.stl" scale = "1.66 1 1.66"/>
         </geometry>
         <origin xyz="0.0 0.0 0.0" rpy="3.14 0 0.0"/>
         <material name="White" >
@@ -268,7 +268,7 @@
 <link name="ml_wheel">
     <visual>
         <geometry>
-            <mesh filename="package://ga_slam_visualization/urdf/meshes/exoter/wheel.stl" scale = "1 1 1"/>
+            <mesh filename="package://ga_slam_visualization/urdf/meshes/exoter/wheel.stl" scale = "1.66 1 1.66"/>
         </geometry>
         <origin xyz="0.0 0.0 0.0" rpy="0 0 0.0"/>
         <material name="White" >
@@ -281,7 +281,7 @@
 <link name="mr_wheel">
     <visual>
         <geometry>
-            <mesh filename="package://ga_slam_visualization/urdf/meshes/exoter/wheel.stl" scale = "1 1 1"/>
+            <mesh filename="package://ga_slam_visualization/urdf/meshes/exoter/wheel.stl" scale = "1.66 1 1.66"/>
         </geometry>
         <origin xyz="0.0 0.0 0.0" rpy="3.14 0 0.0"/>
         <material name="White" >
@@ -294,7 +294,7 @@
 <link name="rl_wheel">
     <visual>
         <geometry>
-            <mesh filename="package://ga_slam_visualization/urdf/meshes/exoter/wheel.stl" scale = "1 1 1"/>
+            <mesh filename="package://ga_slam_visualization/urdf/meshes/exoter/wheel.stl" scale = "1.66 1 1.66"/>
         </geometry>
         <origin xyz="0.0 0.0 0.0" rpy="0 0 0.0"/>
         <material name="White" >
@@ -307,7 +307,7 @@
 <link name="rr_wheel">
     <visual>
         <geometry>
-            <mesh filename="package://ga_slam_visualization/urdf/meshes/exoter/wheel.stl" scale = "1 1 1"/>
+            <mesh filename="package://ga_slam_visualization/urdf/meshes/exoter/wheel.stl" scale = "1.66 1 1.66"/>
         </geometry>
         <origin xyz="0.0 0.0 0.0" rpy="3.14 0 0.0"/>
         <material name="White" >
@@ -323,8 +323,8 @@
             <mesh filename="package://ga_slam_visualization/urdf/meshes/exoter/mast_assembly.stl" scale = "1 1 1"/>
         </geometry>
         <origin xyz="0.0 0.0 0.0" rpy="0 0 0.0"/>
-        <material name="Black" >
-            <color rgba="0.0 0.0 0.0 1.0"/>
+        <material name="White" >
+            <color rgba="1.0 1.0 1.0 1.0"/>
         </material>
     </visual>
 </link>
@@ -336,8 +336,8 @@
             <mesh filename="package://ga_slam_visualization/urdf/meshes/exoter/pan_drive.stl" scale = "1 1 1"/>
         </geometry>
         <origin xyz="0.0 0.0 0.0" rpy="0 0 0.0"/>
-        <material name="Black" >
-            <color rgba="0.0 0.0 0.0 1.0"/>
+        <material name="White" >
+            <color rgba="1.0 1.0 1.0 1.0"/>
         </material>
     </visual>
 </link>
@@ -349,8 +349,8 @@
             <mesh filename="package://ga_slam_visualization/urdf/meshes/exoter/tilt_drive.stl" scale = "1 1 1"/>
         </geometry>
         <origin xyz="0.0 0.0 0.0" rpy="0 0 0.0"/>
-        <material name="Black" >
-            <color rgba="0.0 0.0 0.0 1.0"/>
+        <material name="White" >
+            <color rgba="1.0 1.0 1.0 1.0"/>
         </material>
     </visual>
 </link>
@@ -373,8 +373,8 @@
 <!-- ====================Joint Descriptions =================================================================================-->
 
 <!-- rear joint that connects base and the differential with a revolute joint -->
-<joint name="front_passive" type="continuous">
-    <parent link="body"/>
+<joint name="front_passive" type="fixed">
+    <parent link="body_base"/>
     <child link="differential"/>
     <origin xyz="0.5 0 0" rpy="0.0 0.0 0.00"/> 
     <axis xyz="1 0 0 " /> <!-- revolute rotation about X axis -->
@@ -382,8 +382,8 @@
 </joint>
 
 <!-- right joint that connects base and right_rocker with a revolute joint -->
-<joint name="right_passive" type="continuous">
-    <parent link="body"/>
+<joint name="right_passive" type="fixed">
+    <parent link="body_base"/>
     <child link="right_rocker"/>
     <origin xyz="0.0 -0.41 0.0" rpy="0 0.00 0"/> 
     <axis xyz="0 1 0" /> <!-- revolute rotation about Y axis -->
@@ -392,8 +392,8 @@
 </joint>
 
 <!-- left joint that connects base and left_rocker with a revolute joint -->
-<joint name="left_passive" type="continuous">
-    <parent link="body"/>
+<joint name="left_passive" type="fixed">
+    <parent link="body_base"/>
     <child link="left_rocker"/>
     <origin xyz="0.0 0.41 0" rpy="0 0.00 0"/> 
     <axis xyz="0 1 0" /> <!-- revolute rotation about Y axis -->
@@ -402,7 +402,7 @@
 </joint>
 
 <!-- left joint that connects left_bogie and left rocker with a revolute -->
-<joint name="left_rocker_bogie" type="continuous">
+<joint name="left_rocker_bogie" type="fixed">
     <parent link="left_rocker"/>
     <child link="left_bogie"/>
     <origin xyz="-0.375 0.0 -0.260" rpy="0 0.0 0"/>
@@ -411,7 +411,7 @@
 </joint>
 
 <!-- right joint that connects right_bogie and right rocker with a revolute -->
-<joint name="right_rocker_bogie" type="continuous">
+<joint name="right_rocker_bogie" type="fixed">
     <parent link="right_rocker"/>
     <child link="right_bogie"/>
     <origin xyz="-0.375 0 -0.260" rpy="0 0.0 0"/>
@@ -458,7 +458,7 @@
 </joint>
 
 <!-- FL Wheel steer joint with a revolute joint -->
-<joint name="fl_steer" type="continuous">
+<joint name="fl_steer" type="fixed">
     <parent link="fl_motor"/>
     <child link="fl_fork"/>
     <origin xyz="0 0.0 -0.03" rpy="0 0.00 0"/> 
@@ -467,7 +467,7 @@
 </joint>
 
 <!-- FR Wheel steer joint with a revolute joint -->
-<joint name="fr_steer" type="continuous">
+<joint name="fr_steer" type="fixed">
     <parent link="fr_motor"/>
     <child link="fr_fork"/>
     <origin xyz="0 0.0 -0.03" rpy="0 0.00 0"/> 
@@ -476,7 +476,7 @@
 </joint>
 
 <!-- RL Wheel steer joint with a revolute joint -->
-<joint name="rl_steer" type="continuous">
+<joint name="rl_steer" type="fixed">
     <parent link="rl_motor"/>
     <child link="rl_fork"/>
     <origin xyz="0 0.0 -0.03" rpy="0 0.00 0"/> 
@@ -485,7 +485,7 @@
 </joint>
 
 <!-- RR Wheel steer joint with a revolute joint -->
-<joint name="rr_steer" type="continuous">
+<joint name="rr_steer" type="fixed">
     <parent link="rr_motor"/>
     <child link="rr_fork"/>
     <origin xyz="0 0.0 -0.03" rpy="0 0.00 0"/> 
@@ -494,7 +494,7 @@
 </joint>
 
 <!-- FL Wheel drive joint with a revolute joint -->
-<joint name="fl_drive" type="continuous">
+<joint name="fl_drive" type="fixed">
     <parent link="fl_fork"/>
     <child link="fl_wheel"/>
     <origin xyz="0 0.0 -0.0953" rpy="0 0.00 0"/> 
@@ -503,7 +503,7 @@
 </joint>
 
 <!-- FR Wheel drive joint with a revolute joint -->
-<joint name="fr_drive" type="continuous">
+<joint name="fr_drive" type="fixed">
     <parent link="fr_fork"/>
     <child link="fr_wheel"/>
     <origin xyz="0 0.0 -0.0953" rpy="0 0.00 0"/> 
@@ -512,7 +512,7 @@
 </joint>
 
 <!-- ML Wheel drive joint with a revolute joint -->
-<joint name="ml_drive" type="continuous">
+<joint name="ml_drive" type="fixed">
     <parent link="ml_motor"/>
     <child link="ml_wheel"/>
     <origin xyz="0 0.0 -0.1253" rpy="0 0.00 0"/> 
@@ -521,7 +521,7 @@
 </joint>
 
 <!-- MR Wheel drive joint with a revolute joint -->
-<joint name="mr_drive" type="continuous">
+<joint name="mr_drive" type="fixed">
     <parent link="mr_motor"/>
     <child link="mr_wheel"/>
     <origin xyz="0 0.0 -0.1253" rpy="0 0.00 0"/> 
@@ -530,7 +530,7 @@
 </joint>
 
 <!-- RL Wheel drive joint with a revolute joint -->
-<joint name="rl_drive" type="continuous">
+<joint name="rl_drive" type="fixed">
     <parent link="rl_fork"/>
     <child link="rl_wheel"/>
     <origin xyz="0 0.0 -0.0953" rpy="0 0.00 0"/> 
@@ -539,7 +539,7 @@
 </joint>
 
 <!-- RR Wheel drive joint with a revolute joint -->
-<joint name="rr_drive" type="continuous">
+<joint name="rr_drive" type="fixed">
     <parent link="rr_fork"/>
     <child link="rr_wheel"/>
     <origin xyz="0 0.0 -0.0953" rpy="0 0.00 0"/> 
@@ -549,7 +549,7 @@
 
 <!-- Mast assembly with a fixed joint -->
 <joint name="mast_joint" type="fixed">
-    <parent link="body"/>
+    <parent link="body_base"/>
     <child link="mast_assembly"/>
     <origin xyz="0.076 0.0 0.0" rpy="0 0.0 0"/> 
     <limit lower="-1.6" upper="1.6" velocity="6.28" effort="100"/>
@@ -564,7 +564,7 @@
 </joint>
 
 <!-- Pan joint with a revolute joint -->
-<joint name="pan_joint" type="continuous">
+<joint name="pan_joint" type="fixed">
     <parent link="pan_drive"/>
     <child link="tilt_drive"/>
     <origin xyz="0.0 0.0 0.0" rpy="0 0.0 0"/> 
@@ -573,7 +573,7 @@
 </joint>
 
 <!-- Tilt joint with a revolute joint -->
-<joint name="tilt_joint" type="continuous">
+<joint name="tilt_joint" type="fixed">
     <parent link="tilt_drive"/>
     <child link="camera_assembly"/>
     <origin xyz="0.0 0.0 0.03" rpy="0 0.0 0"/> 

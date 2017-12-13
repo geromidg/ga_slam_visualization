@@ -9,6 +9,6 @@
 
   <node pkg="robot_state_publisher" type="robot_state_publisher" name="state_publisher"/>
 
-  <param name="robot_description" command="cat $(find ga_slam_visualization)/urdf/exoter.urdf" />
+  <param name="robot_description" command="cat $(find ga_slam_visualization)/urdf/hdpr.urdf" />
 </launch>
 

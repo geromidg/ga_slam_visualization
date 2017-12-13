@@ -12,6 +12,7 @@ find_package(catkin REQUIRED COMPONENTS
     grid_map_ros
     roscpp
     std_msgs
+    eigen_conversions
 )
 
 find_package(Eigen3 REQUIRED)
@@ -25,6 +26,7 @@ catkin_package(
         grid_map_msgs
         roscpp
         std_msgs
+        eigen_conversions
 )
 
 include_directories(

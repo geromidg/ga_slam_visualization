@@ -21,6 +21,8 @@ int main(int argc, char **argv) {
     ros::Rate rate(1);
     ros::Publisher rawMapPublisher = nodeHandle.
             advertise<grid_map_msgs::GridMap>("raw_map", 1, true);
+    ros::Publisher globalMapPublisher = nodeHandle.
+            advertise<grid_map_msgs::GridMap>("global_map", 1, true);
     ros::Publisher posePublisher = nodeHandle.
             advertise<geometry_msgs::PoseStamped>("pose", 1, true);
     ros::Publisher pathPublisher = nodeHandle.
@@ -36,26 +38,28 @@ int main(int argc, char **argv) {
     nav_msgs::Path pathMessage;
     tf::Transform bodyToMapTF;
 
-    grid_map::GridMap rawMap;
-    grid_map_msgs::GridMap rawMapMessage;
-    grid_map::Time lastStamp, currentStamp;
+    grid_map::GridMap rawMap, globalMap;
+    grid_map_msgs::GridMap mapMessage;
+    grid_map::Time lastRawMapStamp, currentRawMapStamp;
+    grid_map::Time lastGlobalMapStamp, currentGlobalMapStamp;
 
-    lastStamp = 0;
+    lastRawMapStamp = 0;
+    lastGlobalMapStamp = 0;
 
     while (ros::ok()) {
         loadPose(pose, "/tmp/ga_slam_pose.cereal");
-        loadGridMap(rawMap, "/tmp/ga_slam_map.cereal");
 
+        loadGridMap(rawMap, "/tmp/ga_slam_local_map.cereal");
         rawMap.setFrameId(mapFrameId);
-        currentStamp = rawMap.getTimestamp();
+        currentRawMapStamp = rawMap.getTimestamp();
 
-        if (currentStamp != lastStamp) {
-            grid_map::GridMapRosConverter::toMessage(rawMap, rawMapMessage);
-            rawMapPublisher.publish(rawMapMessage);
+        if (currentRawMapStamp != lastRawMapStamp) {
+            grid_map::GridMapRosConverter::toMessage(rawMap, mapMessage);
+            rawMapPublisher.publish(mapMessage);
 
             tf::poseEigenToMsg(pose, poseMessage);
             poseStampedMessage.pose = poseMessage;
-            poseStampedMessage.header.stamp.fromNSec(currentStamp);
+            poseStampedMessage.header.stamp.fromNSec(currentRawMapStamp);
             poseStampedMessage.header.frame_id = mapFrameId;
             posePublisher.publish(poseStampedMessage);
 
@@ -63,14 +67,25 @@ int main(int argc, char **argv) {
             tfBroadcaster.sendTransform(tf::StampedTransform(
                     bodyToMapTF, ros::Time::now(), mapFrameId, bodyFrameId));
 
-            if (currentStamp < lastStamp)
+            if (currentRawMapStamp < lastRawMapStamp)
                 pathMessage.poses.clear();
-            pathMessage.header.stamp.fromNSec(currentStamp);
+            pathMessage.header.stamp.fromNSec(currentRawMapStamp);
             pathMessage.header.frame_id = mapFrameId;
             pathMessage.poses.push_back(poseStampedMessage);
             pathPublisher.publish(pathMessage);
 
-            lastStamp = currentStamp;
+            lastRawMapStamp = currentRawMapStamp;
+        }
+
+        loadGridMap(globalMap, "/tmp/ga_slam_global_map.cereal");
+        globalMap.setFrameId(mapFrameId);
+        currentGlobalMapStamp = globalMap.getTimestamp();
+
+        if (currentGlobalMapStamp != lastGlobalMapStamp) {
+            grid_map::GridMapRosConverter::toMessage(globalMap, mapMessage);
+            globalMapPublisher.publish(mapMessage);
+
+            lastGlobalMapStamp = currentGlobalMapStamp;
         }
 
         rate.sleep();

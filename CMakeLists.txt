@@ -4,7 +4,7 @@ project(ga_slam_visualization)
 set(CMAKE_CXX_FLAGS "-std=c++11 ${CMAKE_CXX_FLAGS}")
 
 find_package(PkgConfig REQUIRED)
-pkg_check_modules(ga_slam_visualization_PKGCONFIG REQUIRED grid_map_cereal)
+pkg_check_modules(ga_slam_visualization_PKGCONFIG REQUIRED ga_slam_cereal)
 
 find_package(catkin REQUIRED COMPONENTS
     grid_map_core

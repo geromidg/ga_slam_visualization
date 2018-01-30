@@ -13,7 +13,7 @@
 #include <grid_map_ros/grid_map_ros.hpp>
 #include <grid_map_msgs/GridMap.h>
 
-#include "grid_map_cereal/GridMapCereal.hpp"
+#include "ga_slam_cereal/GridMapCereal.h"
 
 int main(int argc, char **argv) {
     ros::init(argc, argv, "ga_slam_visualization");
@@ -23,19 +23,23 @@ int main(int argc, char **argv) {
             advertise<grid_map_msgs::GridMap>("raw_map", 1, true);
     ros::Publisher globalMapPublisher = nodeHandle.
             advertise<grid_map_msgs::GridMap>("global_map", 1, true);
-    ros::Publisher posePublisher = nodeHandle.
-            advertise<geometry_msgs::PoseStamped>("pose", 1, true);
-    ros::Publisher pathPublisher = nodeHandle.
-            advertise<nav_msgs::Path>("path", 1, true);
+    ros::Publisher slamPosePublisher = nodeHandle.
+            advertise<geometry_msgs::PoseStamped>("slam_pose", 1, true);
+    ros::Publisher globalPosePublisher = nodeHandle.
+            advertise<geometry_msgs::PoseStamped>("global_pose", 1, true);
+    ros::Publisher slamPosePath = nodeHandle.
+            advertise<nav_msgs::Path>("slam_pose_path", 1, true);
+    ros::Publisher globalPosePath = nodeHandle.
+            advertise<nav_msgs::Path>("global_pose_path", 1, true);
     tf::TransformBroadcaster tfBroadcaster;
 
     const std::string mapFrameId = "map";
     const std::string bodyFrameId = "body_base";
 
-    Eigen::Affine3d pose;
+    Eigen::Affine3d slamPose, globalPose;
     geometry_msgs::Pose poseMessage;
     geometry_msgs::PoseStamped poseStampedMessage;
-    nav_msgs::Path pathMessage;
+    nav_msgs::Path slamPosePathMessage, globalPosePathMessage;
     tf::Transform bodyToMapTF;
 
     grid_map::GridMap rawMap, globalMap;
@@ -47,7 +51,8 @@ int main(int argc, char **argv) {
     lastGlobalMapStamp = 0;
 
     while (ros::ok()) {
-        loadPose(pose, "/tmp/ga_slam_pose.cereal");
+        loadPose(slamPose, "/tmp/ga_slam_slam_pose.cereal");
+        loadPose(globalPose, "/tmp/ga_slam_global_pose.cereal");
 
         loadGridMap(rawMap, "/tmp/ga_slam_local_map.cereal");
         rawMap.setFrameId(mapFrameId);
@@ -57,22 +62,37 @@ int main(int argc, char **argv) {
             grid_map::GridMapRosConverter::toMessage(rawMap, mapMessage);
             rawMapPublisher.publish(mapMessage);
 
-            tf::poseEigenToMsg(pose, poseMessage);
+            tf::poseEigenToMsg(globalPose, poseMessage);
             poseStampedMessage.pose = poseMessage;
             poseStampedMessage.header.stamp.fromNSec(currentRawMapStamp);
             poseStampedMessage.header.frame_id = mapFrameId;
-            posePublisher.publish(poseStampedMessage);
-
-            tf::poseEigenToTF(pose, bodyToMapTF);
-            tfBroadcaster.sendTransform(tf::StampedTransform(
-                    bodyToMapTF, ros::Time::now(), mapFrameId, bodyFrameId));
+            globalPosePublisher.publish(poseStampedMessage);
 
             if (currentRawMapStamp < lastRawMapStamp)
-                pathMessage.poses.clear();
-            pathMessage.header.stamp.fromNSec(currentRawMapStamp);
-            pathMessage.header.frame_id = mapFrameId;
-            pathMessage.poses.push_back(poseStampedMessage);
-            pathPublisher.publish(pathMessage);
+                globalPosePathMessage.poses.clear();
+
+            globalPosePathMessage.header.stamp.fromNSec(currentRawMapStamp);
+            globalPosePathMessage.header.frame_id = mapFrameId;
+            globalPosePathMessage.poses.push_back(poseStampedMessage);
+            globalPosePath.publish(globalPosePathMessage);
+
+            tf::poseEigenToMsg(slamPose, poseMessage);
+            poseStampedMessage.pose = poseMessage;
+            poseStampedMessage.header.stamp.fromNSec(currentRawMapStamp);
+            poseStampedMessage.header.frame_id = mapFrameId;
+            slamPosePublisher.publish(poseStampedMessage);
+
+            if (currentRawMapStamp < lastRawMapStamp)
+                slamPosePathMessage.poses.clear();
+
+            slamPosePathMessage.header.stamp.fromNSec(currentRawMapStamp);
+            slamPosePathMessage.header.frame_id = mapFrameId;
+            slamPosePathMessage.poses.push_back(poseStampedMessage);
+            slamPosePath.publish(slamPosePathMessage);
+
+            tf::poseEigenToTF(slamPose, bodyToMapTF);
+            tfBroadcaster.sendTransform(tf::StampedTransform(
+                    bodyToMapTF, ros::Time::now(), mapFrameId, bodyFrameId));
 
             lastRawMapStamp = currentRawMapStamp;
         }

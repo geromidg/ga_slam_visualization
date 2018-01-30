@@ -4,6 +4,7 @@
 
 #include <ros/ros.h>
 #include <geometry_msgs/PoseStamped.h>
+#include <geometry_msgs/PoseArray.h>
 #include <nav_msgs/Path.h>
 #include <eigen_conversions/eigen_msg.h>
 #include <tf/transform_broadcaster.h>
@@ -27,10 +28,12 @@ int main(int argc, char **argv) {
             advertise<geometry_msgs::PoseStamped>("slam_pose", 1, true);
     ros::Publisher globalPosePublisher = nodeHandle.
             advertise<geometry_msgs::PoseStamped>("global_pose", 1, true);
-    ros::Publisher slamPosePath = nodeHandle.
+    ros::Publisher slamPosePathPublisher = nodeHandle.
             advertise<nav_msgs::Path>("slam_pose_path", 1, true);
-    ros::Publisher globalPosePath = nodeHandle.
+    ros::Publisher globalPosePathPublisher = nodeHandle.
             advertise<nav_msgs::Path>("global_pose_path", 1, true);
+    ros::Publisher particlesArrayPublisher = nodeHandle.
+            advertise<geometry_msgs::PoseArray>("particles_array", 1, true);
     tf::TransformBroadcaster tfBroadcaster;
 
     const std::string mapFrameId = "map";
@@ -41,6 +44,9 @@ int main(int argc, char **argv) {
     geometry_msgs::PoseStamped poseStampedMessage;
     nav_msgs::Path slamPosePathMessage, globalPosePathMessage;
     tf::Transform bodyToMapTF;
+
+    Eigen::ArrayXXd particlesArray;
+    geometry_msgs::PoseArray arrayMessage;
 
     grid_map::GridMap rawMap, globalMap;
     grid_map_msgs::GridMap mapMessage;
@@ -53,6 +59,7 @@ int main(int argc, char **argv) {
     while (ros::ok()) {
         loadPose(slamPose, "/tmp/ga_slam_slam_pose.cereal");
         loadPose(globalPose, "/tmp/ga_slam_global_pose.cereal");
+        loadArray(particlesArray, "/tmp/ga_slam_particles_array.cereal");
 
         loadGridMap(rawMap, "/tmp/ga_slam_local_map.cereal");
         rawMap.setFrameId(mapFrameId);
@@ -74,7 +81,7 @@ int main(int argc, char **argv) {
             globalPosePathMessage.header.stamp.fromNSec(currentRawMapStamp);
             globalPosePathMessage.header.frame_id = mapFrameId;
             globalPosePathMessage.poses.push_back(poseStampedMessage);
-            globalPosePath.publish(globalPosePathMessage);
+            globalPosePathPublisher.publish(globalPosePathMessage);
 
             tf::poseEigenToMsg(slamPose, poseMessage);
             poseStampedMessage.pose = poseMessage;
@@ -88,11 +95,28 @@ int main(int argc, char **argv) {
             slamPosePathMessage.header.stamp.fromNSec(currentRawMapStamp);
             slamPosePathMessage.header.frame_id = mapFrameId;
             slamPosePathMessage.poses.push_back(poseStampedMessage);
-            slamPosePath.publish(slamPosePathMessage);
+            slamPosePathPublisher.publish(slamPosePathMessage);
 
             tf::poseEigenToTF(slamPose, bodyToMapTF);
             tfBroadcaster.sendTransform(tf::StampedTransform(
                     bodyToMapTF, ros::Time::now(), mapFrameId, bodyFrameId));
+
+            arrayMessage.header.stamp.fromNSec(currentRawMapStamp);
+            arrayMessage.header.frame_id = mapFrameId;
+            arrayMessage.poses.resize(particlesArray.rows());
+
+            for (auto i = 0; i < particlesArray.rows(); ++i) {
+                const auto quaternion = tf::createQuaternionFromYaw(
+                        particlesArray(i, 2));
+                const auto position = tf::Vector3(
+                        particlesArray(i, 0),
+                        particlesArray(i, 1),
+                        slamPose.translation().z());
+                const auto particlePose = tf::Pose(quaternion, position);
+                tf::poseTFToMsg(particlePose, arrayMessage.poses[i]);
+            }
+
+            particlesArrayPublisher.publish(arrayMessage);
 
             lastRawMapStamp = currentRawMapStamp;
         }

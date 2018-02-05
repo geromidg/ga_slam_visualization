@@ -281,11 +281,11 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Scale: 8
-      Target Frame: <Fixed Frame>
+      Scale: 52.3053017
+      Target Frame: body_base
       Value: TopDownOrtho (rviz)
-      X: 0
-      Y: 0
+      X: 0.0449124314
+      Y: -0.0864190012
     Saved: ~
 Window Geometry:
   Displays:
@@ -303,5 +303,5 @@ Window Geometry:
   Views:
     collapsed: true
   Width: 1509
-  X: 2083
-  Y: 0
+  X: 2124
+  Y: 50
